@@ -10,4 +10,10 @@ class AndroidNotificationListener {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+  static Future<bool> isPermissionGranted() async =>
+      await _channel.invokeMethod('isPermissionGranted');
+
+  static Future<void> askPermission() async =>
+      await _channel.invokeMethod('askPermission');
 }
