@@ -33,12 +33,14 @@ class _MyBodyState extends State<Body> {
 
   @override
   void initState() {
-    notificationListener = AndroidNotificationListener(showSnackBar);
+    notificationListener = AndroidNotificationListener(
+      onNotificationPosted: (item) {
+        Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(
+                "${item.title} ${item.text} ${item.packageName} ${item.subText}")));
+      },
+    );
     super.initState();
-  }
-
-  void showSnackBar(NotificationItem item) {
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text(item.text)));
   }
 
   @override
@@ -54,8 +56,8 @@ class _MyBodyState extends State<Body> {
                 Scaffold.of(context)
                     .showSnackBar(SnackBar(content: Text("yes")));
               } else {
-                Scaffold.of(context)
-                    .showSnackBar(SnackBar(content: Text("No")));
+                Scaffold.of(context).showSnackBar(
+                    SnackBar(content: Text("No, ask Permission")));
               }
             },
           ),

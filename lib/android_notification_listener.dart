@@ -7,9 +7,9 @@ import 'package:meta/meta.dart';
 class AndroidNotificationListener {
   void Function(NotificationItem) onNotificationPosted;
 
-  AndroidNotificationListener(
-    this.onNotificationPosted,
-  );
+  AndroidNotificationListener({
+    @required this.onNotificationPosted,
+  });
 
   static const MethodChannel _channel =
       const MethodChannel('android_notification_listener');
