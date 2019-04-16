@@ -53,7 +53,11 @@ public class AndroidNotificationListenerPlugin implements MethodCallHandler {
                 activity.startActivity(new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
                 result.success(null);
                 break;
-
+            case "startListener":
+                NotificationListener.setBackgroundChannel(channel);
+                activity.startService(new Intent(activity, NotificationListener.class));
+                result.success(true);
+                break;
             default:
                 result.notImplemented();
         }

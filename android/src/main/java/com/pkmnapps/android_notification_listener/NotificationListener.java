@@ -4,8 +4,16 @@ import android.annotation.SuppressLint;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 
+import io.flutter.plugin.common.MethodChannel;
+
 @SuppressLint({"NewApi", "Registered"})
 public class NotificationListener extends NotificationListenerService {
+
+    private static MethodChannel channel;
+
+    public static void setBackgroundChannel(MethodChannel channel) {
+        NotificationListener.channel = channel;
+    }
 
 
     @Override
@@ -15,7 +23,7 @@ public class NotificationListener extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-
+        channel.invokeMethod("onNotificationPosted", null);
     }
 
     @Override
