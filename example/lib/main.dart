@@ -29,6 +29,18 @@ class Body extends StatefulWidget {
 }
 
 class _MyBodyState extends State<Body> {
+  AndroidNotificationListener notificationListener;
+
+  @override
+  void initState() {
+    notificationListener = AndroidNotificationListener(showSnackBar);
+    super.initState();
+  }
+
+  void showSnackBar(NotificationItem item) {
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text(item.text)));
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -38,7 +50,7 @@ class _MyBodyState extends State<Body> {
           RaisedButton(
             child: Text("isPermissionGranted"),
             onPressed: () async {
-              if (await AndroidNotificationListener.isPermissionGranted()) {
+              if (await notificationListener.isPermissionGranted()) {
                 Scaffold.of(context)
                     .showSnackBar(SnackBar(content: Text("yes")));
               } else {
@@ -50,13 +62,13 @@ class _MyBodyState extends State<Body> {
           RaisedButton(
             child: Text("askPermission"),
             onPressed: () async {
-              await AndroidNotificationListener.askPermission();
+              await notificationListener.askPermission();
             },
           ),
           RaisedButton(
             child: Text("startListener"),
             onPressed: () async {
-              await AndroidNotificationListener.startListener();
+              await notificationListener.startListener();
               Scaffold.of(context)
                   .showSnackBar(SnackBar(content: Text("starting listener")));
             },

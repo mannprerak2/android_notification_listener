@@ -2,33 +2,48 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
+import 'package:meta/meta.dart';
+
 class AndroidNotificationListener {
+  void Function(NotificationItem) onNotificationPosted;
+
+  AndroidNotificationListener(
+    this.onNotificationPosted,
+  );
+
   static const MethodChannel _channel =
       const MethodChannel('android_notification_listener');
 
-  static Future<dynamic> _handleMethod(MethodCall call) async {
+  Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case "onNotificationPosted":
-        print("=================");
-        print(call.arguments);
-        print("=================");
+        onNotificationPosted(
+          NotificationItem(call.arguments[0], call.arguments[1],
+              call.arguments[2], call.arguments[3]),
+        );
+        break;
     }
   }
-
 
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
 
-  static Future<bool> isPermissionGranted() async =>
+  Future<bool> isPermissionGranted() async =>
       await _channel.invokeMethod('isPermissionGranted');
 
-  static Future<void> askPermission() async =>
+  Future<void> askPermission() async =>
       await _channel.invokeMethod('askPermission');
 
-  static Future<bool> startListener() async {
+  Future<bool> startListener() async {
     _channel.setMethodCallHandler(_handleMethod);
     await _channel.invokeMethod('startListener');
   }
+}
+
+class NotificationItem {
+  String packageName, title, text, subText;
+
+  NotificationItem(this.packageName, this.title, this.text, this.subText);
 }
