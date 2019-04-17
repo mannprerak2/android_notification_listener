@@ -53,6 +53,15 @@ class _MyBodyState extends State<Body> {
               await AndroidNotificationListener.askPermission();
             },
           ),
+          RaisedButton(
+            child: Text("Start Listener"),
+            onPressed: () async {
+              await AndroidNotificationListener.initialize((item) {
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text(item.toString())));
+              });
+            },
+          ),
         ],
       ),
     );
