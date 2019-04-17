@@ -62,7 +62,6 @@ public class NotificationListener extends NotificationListenerService {
             // Handle all the alarm events received before the Dart isolate was fully
             // initialized and clear the queue.
             for (JSONArray item : sNotificationQueue) {
-                Log.i(TAG,"invoke dispatcher (on initialized)");
                 invokeCallbackDispatcher(item);
             }
             sNotificationQueue.clear();
@@ -73,8 +72,8 @@ public class NotificationListener extends NotificationListenerService {
     // This is where we handle alarm events before sending them to our callback
     // dispatcher in Dart.
     private static void invokeCallbackDispatcher(JSONArray array) {
-
         if (sBackgroundChannel == null) {
+            Log.i(TAG, "channel was null, did you call initialise?");
             return;
         }
 
@@ -83,6 +82,7 @@ public class NotificationListener extends NotificationListenerService {
 
     public static void startIsolate(Context context, long callbackHandle) {
         FlutterMain.ensureInitializationComplete(context, null);
+
         String mAppBundlePath = FlutterMain.findAppBundlePath(context);
         FlutterCallbackInformation cb =
                 FlutterCallbackInformation.lookupCallbackInformation(callbackHandle);
@@ -99,7 +99,6 @@ public class NotificationListener extends NotificationListenerService {
             if (sPluginRegistrantCallback == null) {
                 return;
             }
-            Log.i(TAG, "Starting Isolate");
             FlutterRunArguments args = new FlutterRunArguments();
             args.bundlePath = mAppBundlePath;
             args.entrypoint = cb.callbackName;
@@ -107,8 +106,6 @@ public class NotificationListener extends NotificationListenerService {
             sBackgroundFlutterView.runFromBundle(args);
             sPluginRegistrantCallback.registerWith(sBackgroundFlutterView.getPluginRegistry());
         }
-
-        sStarted.set(true);
     }
 
     @Override
