@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:path_provider/path_provider.dart';
 
 void callbackDispatcher() {
   const MethodChannel _backgroundChannel = MethodChannel(
@@ -27,8 +28,14 @@ void callbackDispatcher() {
   _backgroundChannel.invokeMethod('NotificationListener.initialized');
 }
 
-void notificationCallback(NotificationItem obj) {
-  print("${obj.packageName} ${obj.title} ${obj.text} ${obj.subText}");
+void notificationCallback(NotificationItem obj) async {
+  String message =
+      "${DateTime.now()} ${obj.packageName} ${obj.title} ${obj.text} ${obj.subText} \n";
+  print(message);
+
+  final directory = await getExternalStorageDirectory();
+  final file = File('${directory.path}/notification_logs_pkmn.txt');
+  await file.writeAsString(message, mode: FileMode.APPEND);
 }
 
 class AndroidNotificationListener {
