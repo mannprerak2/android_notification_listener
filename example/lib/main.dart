@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:android_notification_listener/android_notification_listener.dart';
 
 void main() => runApp(MyApp());
@@ -34,7 +31,7 @@ class _MyBodyState extends State<Body> {
   @override
   void initState() {
     notificationListener = AndroidNotificationListener(
-      onNotificationPosted: (item) {
+      (item) {
         Scaffold.of(context).showSnackBar(SnackBar(
             content: Text(
                 "${item.title} ${item.text} ${item.packageName} ${item.subText}")));
@@ -45,7 +42,6 @@ class _MyBodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Center(
       child: Column(
         children: <Widget>[

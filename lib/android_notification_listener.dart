@@ -2,14 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-import 'package:meta/meta.dart';
-
 class AndroidNotificationListener {
   void Function(NotificationItem) onNotificationPosted;
 
-  AndroidNotificationListener({
-    @required this.onNotificationPosted,
-  });
+  AndroidNotificationListener(
+    this.onNotificationPosted,
+  );
 
   static const MethodChannel _channel =
       const MethodChannel('android_notification_listener');
@@ -38,7 +36,7 @@ class AndroidNotificationListener {
 
   Future<bool> startListener() async {
     _channel.setMethodCallHandler(_handleMethod);
-    await _channel.invokeMethod('startListener');
+    return await _channel.invokeMethod('startListener');
   }
 }
 
