@@ -80,12 +80,12 @@ The following configuration options are available-
   <tr>
     <td>output<br><i>(Required)</i></td>
     <td>Output path of the generated bindings.</td>
-    <td><pre><code class="yaml language-yaml">output: 'generated_bindings.dart'</code></pre></td>
+    <td><pre><code class="language-yaml">output: 'generated_bindings.dart'</code></pre></td>
   </tr>
   <tr>
     <td>headers<br><i>(Required)</i></td>
     <td>The header entry-points and include-directives. Glob syntax is allowed.</td>
-    <td><pre><code class="yaml language-yaml">
+    <td><pre><code class="language-yaml">
 headers:
   entry-points:
     - 'folder/**.h'
@@ -105,7 +105,7 @@ headers:
     If you want to disable all comments you can also pass<br>
     comments: false.
     </td>
-    <td><pre><code class="yaml language-yaml">
+    <td><pre><code class="language-yaml">
 comments:
   style: doxygen
   length: full</code></pre>
@@ -114,22 +114,22 @@ comments:
   <tr>
     <td>name<br><i>(Prefer)</i></td>
     <td>Name of generated class.</td>
-    <td><pre><code class="yaml language-yaml">name: 'SQLite'</code></pre></td>
+    <td><pre><code class="language-yaml">name: 'SQLite'</code></pre></td>
   </tr>
   <tr>
     <td>description<br><i>(Prefer)</i></td>
     <td>Dart Doc for generated class.</td>
-    <td><pre><code class="yaml language-yaml">description: 'Bindings to SQLite'</code></pre></td>
+    <td><pre><code class="language-yaml">description: 'Bindings to SQLite'</code></pre></td>
   </tr>
   <tr>
     <td>compiler-opts</td>
     <td>Pass compiler options to clang.</td>
-    <td><pre><code class="yaml language-yaml">compiler-opts: '-I/usr/lib/llvm-9/include/'</code></pre></td>
+    <td><pre><code class="language-yaml">compiler-opts: '-I/usr/lib/llvm-9/include/'</code></pre></td>
   </tr>
   <tr>
     <td>functions<br>structs<br>enums<br>unnamed-enums<br>macros</td>
     <td>Filters for declarations.<br><b>Default: all are included</b></td>
-    <td><pre><code class="yaml language-yaml">
+    <td><pre><code class="language-yaml">
 functions:
   include: # 'exclude' is also available.
     - [a-z][a-zA-Z0-9]* # Matches using regexp.
@@ -158,33 +158,33 @@ enums:
     <td>Should generate workaround for fixed arrays in Structs. See <a href="#array-workaround">Array Workaround</a><br>
       <b>Default: false</b>
     </td>
-    <td><pre><code class="yaml language-yaml">array-workaround: true</code></pre></td>
+    <td><pre><code class="language-yaml">array-workaround: true</code></pre></td>
   </tr>
   <tr>
     <td>sort</td>
     <td>Sort the bindings according to name.<br>
       <b>Default: false</b>, i.e keep the order as in the source files.
     </td>
-    <td><pre><code class="yaml language-yaml">sort: true</code></pre></td>
+    <td><pre><code class="language-yaml">sort: true</code></pre></td>
   </tr>
   <tr>
     <td>use-supported-typedefs</td>
     <td>Should automatically map typedefs, E.g uint8_t => Uint8, int16_t => Int16 etc.<br>
     <b>Default: true</b>
     </td>
-    <td><pre><code class="yaml language-yaml">use-supported-typedefs: true</code></pre></td>
+    <td><pre><code class="language-yaml">use-supported-typedefs: true</code></pre></td>
   </tr>
   <tr>
     <td>dart-bool</td>
     <td>Should generate dart `bool` for c99 bool in functions.<br>
     <b>Default: true</b>
     </td>
-    <td><pre><code class="yaml language-yaml">dart-bool: true</code></pre></td>
+    <td><pre><code class="language-yaml">dart-bool: true</code></pre></td>
   </tr>
    <tr>
     <td>preamble</td>
     <td>Raw header of the file, pasted as-it-is.</td>
-    <td><pre><code class="yaml language-yaml">
+    <td><pre><code class="language-yaml">
 preamble: |
   /// AUTO GENERATED FILE, DO NOT EDIT.
   ///
@@ -196,7 +196,7 @@ preamble: |
     <b>The defaults (see example) <i>may</i> not be portable on all OS.
     Do not change these unless absolutely sure.</b>
     </td>
-    <td><pre><code class="yaml language-yaml">
+    <td><pre><code class="language-yaml">
 # These are optional and also default,
 # Omitting any and the default will be used.
 size-map:
