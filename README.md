@@ -129,7 +129,7 @@ comments:
   <tr>
     <td>functions<br>structs<br>enums<br>unnamed-enums<br>macros</td>
     <td>Filters for declarations.<br><b>Default: all are included</b></td>
-    <td><pre lang="yaml"><code class="yaml">
+    <td><pre><code class="yaml">
 functions:
   include: # 'exclude' is also available.
     - [a-z][a-zA-Z0-9]* # Matches using regexp.
